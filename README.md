@@ -30,9 +30,9 @@ Se recomienda utilizar la herramienta PostMan para poder utilizar los EndPoint.
 ### Ejemplos de uso de la aplicacion
 
 - Crear Turno
-Metodo: POST
-URL: http://%URLSERVIDOR%:%PUERTO%/appointment-reminder/turnos/
-Datos: 
+* Metodo: POST
+* URL: http://%URLSERVIDOR%:%PUERTO%/appointment-reminder/turnos/
+* Ejemplo de formato: 
    ```js
     {
       "fecha":"2022-10-15"
@@ -43,9 +43,9 @@ Datos:
     }
    ```
 - Enviar Email
-Metodo: POST
-URL: http://%URLSERVIDOR%:%PUERTO%/appointment-reminder/enviar/
-Datos: 
+* Metodo: POST
+* URL: http://%URLSERVIDOR%:%PUERTO%/appointment-reminder/enviar/
+* Ejemplo de formato:
    ```js
     {
       "email":"ejemplo@ejemplo.com"
