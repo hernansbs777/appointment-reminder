@@ -24,35 +24,14 @@ public class EmailService {
     @Value("${app.sendgrid.key}")
     private String appKey;
 
-//    public String sendEmail(String email) {
-//            SendGrid sendGrid = new SendGrid(appKey);
-//            Mail mail = prepareMail(email);
-//        try {
-//            Request request = new Request();
-//            request.setMethod(Method.POST);
-//            request.setEndpoint("mail/send");
-//            request.setBody(mail.build());
-//            Response response = sendGrid.api(request);
-//            if (response != null) {
-//                System.out.println("response code from sendgrid" + response.getHeaders());
-//            }
-//            System.out.println(response.getStatusCode());
-//            System.out.println(response.getBody());
-//            System.out.println(response.getHeaders());
-//        } catch (Throwable ex) {
-//            return "error in sent: " + ex;
-//        }
-//        return "Mail Enviado";
-//    }
-    
-        public ArrayList<String> sendEmailPost(MailContent mc) {
-            ArrayList al = new ArrayList();
-            MessageUtils mu = new MessageUtils();
-            String cuerpo = mu.getBody(mc);
-            String header  = mu.getHeader(mc);
-            
-            SendGrid sendGrid = new SendGrid(appKey);
-            Mail mail = prepareMail(mc.getEmail(), header, cuerpo);
+    public ArrayList<String> sendEmailPost(MailContent mc) {
+        ArrayList al = new ArrayList();
+        MessageUtils mu = new MessageUtils();
+        String cuerpo = mu.getBody(mc);
+        String header = mu.getHeader(mc);
+
+        SendGrid sendGrid = new SendGrid(appKey);
+        Mail mail = prepareMail(mc.getEmail(), header, cuerpo);
         try {
             Request request = new Request();
             request.setMethod(Method.POST);
@@ -62,6 +41,8 @@ public class EmailService {
             if (response != null) {
                 al.add("OK");
                 System.out.println("response code from sendgrid" + response.getHeaders());
+            }else{
+                al.add("ERROR");
             }
         } catch (IOException ex) {
             System.err.println("Error on sendEmail, " + ex);
@@ -69,16 +50,18 @@ public class EmailService {
         }
         al.add(header);
         al.add(cuerpo);
-        
+
         return al;
     }
 
-
     //enviar header y cuerpo
+    @Value("${app.sendgrid.email}")
+    private String fromEmail;
+
     public Mail prepareMail(String email, String header, String cuerpo) {
+
         Mail mail = new Mail();
-        Email fromEmail = new Email();
-        fromEmail.setEmail("hsrodasgenez@gmail.com");
+        Email fromEmail = new Email(this.fromEmail);
         mail.setFrom(fromEmail);
         Email to = new Email();
         to.setEmail(email);

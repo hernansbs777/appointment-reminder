@@ -1,4 +1,5 @@
 package com.hernanrg.appointmentreminder.rest;
+
 import com.hernanrg.appointmentreminder.entities.Turno;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.hernanrg.appointmentreminder.DAO.TurnosDAO;
+import com.hernanrg.appointmentreminder.entities.TurnoTexto;
 
 /**
  * @author Hernan

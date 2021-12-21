@@ -34,8 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Turno.findByHora", query = "SELECT t FROM Turno t WHERE t.hora = :hora"),
     @NamedQuery(name = "Turno.findByInstitucion", query = "SELECT t FROM Turno t WHERE t.institucion = :institucion"),
     @NamedQuery(name = "Turno.findByConsultorio", query = "SELECT t FROM Turno t WHERE t.consultorio = :consultorio"),
-    @NamedQuery(name = "Turno.findByDireccion", query = "SELECT t FROM Turno t WHERE t.direccion = :direccion"),
-    @NamedQuery(name = "Turno.findByTime", query = "SELECT t FROM Turno t WHERE t.time = :time")})
+    @NamedQuery(name = "Turno.findByDireccion", query = "SELECT t FROM Turno t WHERE t.direccion = :direccion")})
 public class Turno implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,10 +60,6 @@ public class Turno implements Serializable {
     @Basic(optional = false)
     @Column(name = "direccion")
     private String direccion;
-    @Basic(optional = false)
-    @Column(name = "time")
-    @Temporal(TemporalType.TIME)
-    private Date time;
 
     public Turno() {
     }
@@ -80,7 +75,6 @@ public class Turno implements Serializable {
         this.institucion = institucion;
         this.consultorio = consultorio;
         this.direccion = direccion;
-        this.time = time;
     }
 
     public Integer getIdturno() {
@@ -129,14 +123,6 @@ public class Turno implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
     }
 
     @Override
